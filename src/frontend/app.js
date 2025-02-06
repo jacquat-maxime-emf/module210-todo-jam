@@ -1,4 +1,4 @@
-const apiEndpoint = "https://fa-todo-backend-baqmes.azurewebsites.net/api/tasks";
+const apiEndpoint = "https://clicontainerapp.reddune-43b8a5ce.francecentral.azurecontainerapps.io";
 
 $(document).ready(function () {
   // Charger les tâches au démarrage
