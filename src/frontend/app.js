@@ -1,4 +1,4 @@
-const apiEndpoint = "https://clicontainerapp.reddune-43b8a5ce.francecentral.azurecontainerapps.io";
+const apiEndpoint = "https://clicontainerapp.reddune-43b8a5ce.francecentral.azurecontainerapps.io/api/tasks";
 
 $(document).ready(function () {
   // Charger les tâches au démarrage
