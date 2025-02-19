@@ -44,3 +44,20 @@ jobs:
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_PLANT_02CCF9B03 }}
           action: "close"
+
+  check-file-job:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Verify index.html exists
+      run: |
+        if [ ! -f ./index.html ]; then
+          echo "index.html not found!"
+          exit 1
+        else
+          echo "index.html exists."
+        fi
+
