@@ -61,18 +61,15 @@ jobs:
           echo "Le fichier index.html existe."
         fi
 
-  lighthouse_ci_action: 
+  lighthouse_ci_action:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with: 
-          fetch-depth: 0  # Permet d'obtenir tout l'historique Git
-      - name: Lighthouse CI Action
-        # You may pin to the exact commit or the version.
-        # uses: treosh/lighthouse-ci-action@2f8dda6cf4de7d73b29853c3f29e73a01e297bd8
-        uses: treosh/lighthouse-ci-action@v12
         with:
-          # List of URL(s) to analyze
-          urls: https://todo.maximejacquat.emf-informatique.ch
-          temporaryPublicStorage : true
+          fetch-depth: 0
+      - name: Installer les dépendances
+        run: npm install -g @lhci/cli@0.7.x
+      - name: Exécuter Lighthouse CI
+        run: lhci autorun --config=lighthouserc.json
+
           
