@@ -45,7 +45,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_PLANT_02CCF9B03 }}
           action: "close"
 
-  check-file-job:
+check-file-job:
     runs-on: ubuntu-latest
 
     steps:
@@ -60,4 +60,38 @@ jobs:
         else
           echo "Le fichier index.html existe."
         fi
+
+lighthouse_ci_action: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lighthouse CI Action
+        # You may pin to the exact commit or the version.
+        # uses: treosh/lighthouse-ci-action@2f8dda6cf4de7d73b29853c3f29e73a01e297bd8
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          # List of URL(s) to analyze
+          urls: # optional
+          # Path to a Lighthouse budgets.json file
+          budgetPath: # optional
+          # Path to a LHCI lighthouserc.json file
+          configPath: # optional
+          # Opt-out of saving Lighthouse results as an action artifacts
+          uploadArtifacts: # optional
+          # Name of the artifact group if using uploadArtifacts. default: lighthouse-results
+          artifactName: # optional, default is lighthouse-results
+          # 
+          temporaryPublicStorage: # optional
+          # Number of runs to do per URL
+          runs: # optional
+          # Address of a LHCI server
+          serverBaseUrl: # optional
+          # API token to push to LHCI server
+          serverToken: # optional
+          # Basic auth username for LHCI server
+          basicAuthUsername: # optional
+          # Basic auth password for LHCI server
+          basicAuthPassword: # optional
+          # Upload command extra arguments
+          uploadExtraArgs: # optional
+          
 
