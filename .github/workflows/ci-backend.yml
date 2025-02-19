@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v3
       - name: create docker image
         run: |
-          cd module210-todo-jam/src/backend
+          cd ./src/backend
           docker build -t todo-app .
       - name: create tag
         run : docker tag todo-app:latest exo.container-registry.com/c213-emf/todo-app:jam   
