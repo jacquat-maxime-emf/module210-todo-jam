@@ -45,7 +45,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WHITE_PLANT_02CCF9B03 }}
           action: "close"
 
-check-file-job:
+  check-file-job:
     runs-on: ubuntu-latest
 
     steps:
@@ -61,7 +61,7 @@ check-file-job:
           echo "Le fichier index.html existe."
         fi
 
-lighthouse_ci_action: 
+  lighthouse_ci_action: 
     runs-on: ubuntu-latest
     steps:
       - name: Lighthouse CI Action
