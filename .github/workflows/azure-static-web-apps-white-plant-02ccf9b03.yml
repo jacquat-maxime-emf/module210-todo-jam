@@ -55,9 +55,9 @@ jobs:
     - name: Verify index.html exists
       run: |
         if [ ! -f ./index.html ]; then
-          echo "index.html not found!"
+          echo "Error : index.html n'existe pas."
           exit 1
         else
-          echo "index.html exists."
+          echo "Le fichier index.html existe."
         fi
 
