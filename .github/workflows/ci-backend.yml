@@ -1,0 +1,15 @@
+name: Build and save my Docker image to a regitry
+on:
+ push:
+ branches:
+ - main # Déclenchement lorsque le code est poussé sur main
+env:
+ REG_NAME: "nomduregistre" # Nom du registre sans "azurecr.io"
+ IMAGE_NAME: "backend-app" # Nom de votre image dans acr
+jobs:
+ build-and-deploy:
+ runs-on: ubuntu-latest
+ steps:
+ - name: Checkout repository
+ uses: actions/checkout@v3
+ - name: 
