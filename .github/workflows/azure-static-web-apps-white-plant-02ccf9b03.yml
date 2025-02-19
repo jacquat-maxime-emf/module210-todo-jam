@@ -72,3 +72,4 @@ jobs:
           # List of URL(s) to analyze
           urls: https://todo.maximejacquat.emf-informatique.ch
           temporaryPublicStorage : true
+          
