@@ -54,7 +54,7 @@ jobs:
 
     - name: Verify index.html exists
       run: |
-        if [ ! -f ./index.html ]; then
+        if [ ! -f ./src/frontend/index.html ]; then
           echo "Error : index.html n'existe pas."
           exit 1
         else
