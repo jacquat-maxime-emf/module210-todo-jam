@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main  # Déclenchement lorsque le code est poussé sur main
+    paths:
+      - "./src/backend/**"
 
 env:
   REG_NAME: "nomduregistre"  # Nom du registre sans "azurecr.io"
