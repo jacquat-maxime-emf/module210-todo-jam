@@ -7,7 +7,7 @@ on:
 
 env:
   REG_NAME: "nomduregistre"  # Nom du registre sans "azurecr.io"
-  IMAGE_NAME: "backend-app"  # Nom de votre image dans ACR
+  IMAGE_NAME: ""  # Nom de votre image dans ACR
 
 jobs:
   build-and-deploy:
@@ -16,5 +16,12 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
       - name: create docker image
-        run:|
+        run: |
           cd module210-todo-jam/src/backend
+          docker build -t todo-app .
+      - name: create tag
+        run : docker tag todo-app:latest exo.container-registry.com/c213-emf/todo-app:jam   
+      - name: login
+        run: docker login -u quentin.badoud@edufr.ch -p C4cG4FfJBBpe4cWHSZ5HjgXWFR4wa7wU exo.container-registry.com
+      - name: push image
+        run: docker push exo.container-registry.com/c213-emf/todo-app:jam
