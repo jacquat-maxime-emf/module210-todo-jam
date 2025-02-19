@@ -64,6 +64,9 @@ jobs:
   lighthouse_ci_action: 
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
+        with: 
+          fetch-depth: 0  # Permet d'obtenir tout l'historique Git
       - name: Lighthouse CI Action
         # You may pin to the exact commit or the version.
         # uses: treosh/lighthouse-ci-action@2f8dda6cf4de7d73b29853c3f29e73a01e297bd8
