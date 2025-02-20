@@ -1,21 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todo     App with Backend</title>
+  <title>Todo App Stylée</title>
   <link rel="stylesheet" href="styles.css">
+  <!-- Inclusion de la bibliothèque Animate.css pour des animations supplémentaires -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <!-- Ajout de Google Fonts pour une meilleure typographie -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="app.js" defer></script>
 </head>
 <body>
   <div class="app-container">
-    <h1>Todo App is cool</h1>
-    <form id="todo-form">
-      <input type="text" id="todo-input" placeholder="Add a new task" required>
-      <button type="submit">Add</button>
+    <h1 class="animate__animated animate__fadeInDown">Todo App Stylée</h1>
+    <form id="todo-form" class="animate__animated animate__fadeInUp">
+      <input type="text" id="todo-input" placeholder="Ajouter une nouvelle tâche" required>
+      <button type="submit">Ajouter</button>
     </form>
-    <ul id="todo-list"></ul>
+    <ul id="todo-list" class="animate__animated animate__fadeInUp"></ul>
   </div>
 </body>
 </html>

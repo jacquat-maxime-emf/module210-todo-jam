@@ -1,33 +1,51 @@
-/* Général */
+/* Corps de la page */
 body {
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #185dff, #ee0606, #d8ff2c, #ff08d6);
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradientBackground 15s ease infinite;
   margin: 0;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  color: #333;
+  color: #fff;
+}
+
+/* Animation du gradient de fond */
+@keyframes gradientBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* Conteneur principal */
 .app-container {
-  background: #fff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   width: 100%;
   max-width: 400px;
   text-align: center;
+  transform: scale(0.8);
+  animation: scaleUp 0.5s forwards;
+}
+
+/* Animation de mise à l'échelle du conteneur */
+@keyframes scaleUp {
+  to { transform: scale(1); }
 }
 
 /* Titre */
 .app-container h1 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-  color: #007bff;
-  font-weight: bold;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
 }
 
 /* Formulaire */
@@ -35,34 +53,34 @@ body {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
+  overflow: hidden;
+  border-radius: 50px;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 #todo-input {
   flex: 1;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px 0 0 8px;
+  padding: 15px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px 0 0 50px;
   outline: none;
-  transition: border-color 0.3s ease;
-}
-
-#todo-input:focus {
-  border-color: #e91515;
+  background: transparent;
+  color: #fff;
 }
 
 button {
-  padding: 10px 15px;
-  background-color: #e71a1a;
-  color: white;
+  padding: 15px 20px;
+  background: #e73c7e;
+  color: #fff;
   border: none;
-  border-radius: 0 8px 8px 0;
+  border-radius: 0 50px 50px 0;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease;
 }
 
 button:hover {
-  background-color: #0056b3;
+  background: #ee7752;
 }
 
 /* Liste des tâches */
@@ -74,25 +92,41 @@ button:hover {
 
 #todo-list li {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 10px 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 10px;
-  background: #1e98e9;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 15px 20px;
+  border-radius: 50px;
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#todo-list li::before {
+  content: '';
+  position: absolute;
+  left: -75%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: skewX(-25deg);
+  transition: left 0.5s ease;
 }
 
 #todo-list li:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+}
+
+#todo-list li:hover::before {
+  left: 150%;
 }
 
 #todo-list li.completed {
-  text-decoration: line-through;
-  color: #888;
-  background: #e6e6e6;
+  opacity: 0.6;
 }
 
 /* Boutons */
@@ -101,34 +135,86 @@ button:hover {
   border: none;
   color: #e74c3c;
   cursor: pointer;
-  font-size: 1rem;
-  transition: color 0.3s ease;
+  font-size: 1.2rem;
+  margin-left: auto;
+  transition: transform 0.3s ease;
 }
 
 .delete-btn:hover {
-  color: #c0392b;
+  transform: rotate(90deg);
 }
 
-/* Checkboxes */
+/* Checkboxes personnalisées */
 .task-toggle {
-  margin-right: 10px;
-  transform: scale(1.2);
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin-right: 15px;
   cursor: pointer;
-  accent-color: #007bff;
+  outline: none;
+  background: none;
+  border: none;
+}
+
+.task-toggle::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 24px;
+  height: 24px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.task-toggle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background: #23d5ab;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease;
+}
+
+.task-toggle.checked::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.task-toggle.checked::before {
+  border-color: #23d5ab;
+}
+
+/* Textes des tâches */
+.task-text {
+  flex: 1;
+  font-size: 1rem;
+}
+
+#todo-list li.completed .task-text {
+  text-decoration: line-through;
 }
 
 /* Responsivité */
 @media (max-width: 480px) {
-  #todo-form {
-    flex-direction: column;
+  .app-container {
+    padding: 20px;
   }
 
   #todo-input {
-    border-radius: 8px;
-    margin-bottom: 10px;
+    font-size: 0.9rem;
   }
 
   button {
-    border-radius: 8px;
+    padding: 10px 15px;
+  }
+
+  #todo-list li {
+    padding: 10px 15px;
   }
 }

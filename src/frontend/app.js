@@ -4,7 +4,7 @@ $(document).ready(function () {
   // Charger les tâches au démarrage
   loadTasks();
 
-  // Ajouter une nouvelle tâche
+  // Ajouter une nouvelle tâche avec effet
   $("#todo-form").on("submit", async function (e) {
     e.preventDefault();
 
@@ -27,54 +27,48 @@ $(document).ready(function () {
   });
 
   // Marquer une tâche comme terminée (ou non)
-  $("#todo-list").on("click", ".task-toggle", async function () {
+  $("#todo-list").on("click", ".task-toggle", async function (e) {
+    e.stopPropagation(); // Empêcher la propagation du clic au parent
     const $taskElement = $(this).closest("li"); // Trouve l'élément li parent
     const taskId = $taskElement.data("id");
     const isCompleted = $taskElement.hasClass("completed");
-  
-    // Récupère le texte directement comme un nœud
-    const description = $taskElement.contents().filter(function () {
-      return this.nodeType === 3; // Node type 3 = texte
-    }).text().trim();
-  
-    console.log("Description trouvée :", description);
-  
-    if (!description) {
-      console.error("Erreur : la description de la tâche est vide !");
-      return;
-    }
-  
-    // Prépare l'objet mis à jour
+    const description = $taskElement.find(".task-text").text().trim();
+
     const updatedTask = { id: taskId, description: description, completed: !isCompleted };
-  
+
     try {
       await fetch(apiEndpoint, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedTask),
       });
-      loadTasks(); // Recharge les tâches après mise à jour
+      $taskElement.toggleClass("completed");
+      $(this).toggleClass("checked"); // Ajouter ou retirer la classe 'checked' pour l'animation
     } catch (error) {
       console.error("Erreur lors de la mise à jour de la tâche :", error);
     }
   });
 
-  // Supprimer une tâche
+  // Supprimer une tâche avec animation
   $("#todo-list").on("click", ".delete-btn", async function (e) {
     e.stopPropagation(); // Empêcher le clic sur la tâche elle-même
-    const taskId = $(this).parent().data("id");
+    const $taskElement = $(this).parent();
+    const taskId = $taskElement.data("id");
 
     try {
       await fetch(`${apiEndpoint}?id=${taskId}`, {
         method: "DELETE",
       });
-      loadTasks();
+      // Animation de disparition
+      $taskElement.fadeOut(300, function () {
+        $(this).remove();
+      });
     } catch (error) {
       console.error("Erreur lors de la suppression de la tâche :", error);
     }
   });
 
-  // Charger les tâches depuis l'API
+  // Charger les tâches depuis l'API avec animation
   async function loadTasks() {
     try {
       const response = await fetch(apiEndpoint);
@@ -87,22 +81,26 @@ $(document).ready(function () {
       $("#todo-list").empty();
       tasks.forEach((task) => {
         const listItem = $("<li>")
-          .text(task.description)
           .data("id", task.id)
           .addClass(task.completed ? "completed" : "")
           .append(
-            $("<button>")
-              .text("Delete")
-              .addClass("delete-btn")
+            $("<span>")
+              .addClass("task-toggle" + (task.completed ? " checked" : ""))
           )
-          .prepend(
-            $("<input>")
-              .attr("type", "checkbox")
-              .addClass("task-toggle")
-              .prop("checked", task.completed) // Utilisation correcte de "completed"
+          .append(
+            $("<span>")
+              .addClass("task-text")
+              .text(task.description)
+          )
+          .append(
+            $("<button>")
+              .html("&#10005;")
+              .addClass("delete-btn")
           );
 
         $("#todo-list").append(listItem);
+        // Animation d'apparition
+        listItem.hide().fadeIn(300);
       });
     } catch (error) {
       console.error("Erreur lors du chargement des tâches :", error);
