@@ -1,4 +1,4 @@
-const apiEndpoint = "webappmaximejacquat-dkfsdyg2daa3cae5.canadacentral-01.azurewebsites.net/api/tasks";
+const apiEndpoint = "https://webappmaximejacquat-dkfsdyg2daa3cae5.canadacentral-01.azurewebsites.net/api/tasks";
 
 $(document).ready(function () {
   // Charger les tâches au démarrage
